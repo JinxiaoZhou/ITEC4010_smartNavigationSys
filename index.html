@@ -23,6 +23,7 @@
 
 
 
+
   <script>
     var lat = 0;
     var lng = 0;
@@ -33,6 +34,33 @@
       };
       var map = new google.maps.Map(document.getElementById('map'), mapOptions);
     }
+
+    var destnation = sds;
+    var geocoder = new google.maps.Geocoder();
+    var address = destnation; //'1600 Amphitheatre Parkway, Mountain View, CA'
+
+    geocoder.geocode({ 'address': address }, function (results, status) {
+      if (status === 'OK') {
+        var location = results[0].geometry.location;
+        console.log('Latitude: ' + location.lat());
+        console.log('Longitude: ' + location.lng());
+      } else {
+        console.error('Geocode was not successful for the following reason: ' + status);
+      }
+
+      var latlng = { lat: lat, lng: lng };
+      geocoder.geocode({ 'location': latlng }, function (results, status) {
+        if (status === 'OK') {
+          if (results[0]) {
+            console.log('Address: ' + results[0].formatted_address);
+          } else {
+            console.error('No results found');
+          }
+        } else {
+          console.error('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    });
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 </body>
