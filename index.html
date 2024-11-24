@@ -11,9 +11,10 @@
   <div id="Destination">
     <h2>Destination</h2>
     <form action="index.php" method="post">
-      <label for="destination"></label>
-      <input type="text" id="destination" name="destination" required>
-      <input type="submit" value="Submit">
+      <input id="search-box" type="text" placeholder="Search for a place...">
+<!--      <label for="destination"></label>-->
+<!--      <input type="text" id="destination" name="destination" required>-->
+<!--      <input type="submit" value="Submit">-->
     </form>
   </div>
 
@@ -35,9 +36,64 @@
       var map = new google.maps.Map(document.getElementById('map'), mapOptions);
     }
 
-    var destnation = sds;
+    // search bar
+    const input = document.getElementById("search-box");
+    const searchBox = new google.maps.places.SearchBox(input);
+
+    // bias the searchbox result towards the map's viewpoint
+    map.addListener("bounds_changed", () => {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    // array to hold markers
+    const markers = [];
+
+    // listen for event fired when a user selects a prediction and retrieve details.
+    searchBox.addListener("places_changed", () => {
+      const places = searchBox.getPlaces();
+
+      if(!places || places.length === 0){
+        alert("No specific location found.");
+        return;
+      }
+
+      // clear out previous maker
+      markers.forEach(marker => marker.setMap(null));
+      markers.length = 0;
+
+      // fit map bounds to search result
+      const bounds = new google.maps.LatLngBounds();
+
+      places.forEach(place => {
+        if (!place.geometry || !place.geometry.location) {
+          console.log("Place does not have a valid location.");
+          return;
+        }
+
+        // Add a marker for each place
+        const marker = new google.maps.Marker({
+          map: map,
+          title: place.name,
+          position: place.geometry.location,
+        });
+        markers.push(marker);
+
+        // Adjust map bounds
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+
+      map.fitBounds(bounds);
+    })
+    window.onload = initMap;
+
+
+    var destination = sds;
     var geocoder = new google.maps.Geocoder();
-    var address = destnation; //'1600 Amphitheatre Parkway, Mountain View, CA'
+    var address = destination; //'1600 Amphitheatre Parkway, Mountain View, CA'
 
     geocoder.geocode({ 'address': address }, function (results, status) {
       if (status === 'OK') {
@@ -61,8 +117,10 @@
         }
       });
     });
+
+
   </script>
-  <script async defer src=""https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TDyrwOAf5WE_2-sBc0ktiBIR53CI3bU"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TDyrwOAf5WE_2-sBc0ktiBIR53CI3bU&callback=initMap"></script>
 </body>
 
 </html>

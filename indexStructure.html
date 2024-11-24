@@ -1,44 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="English">
 <head>
     <title>Search and Route Map</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TDyrwOAf5WE_2-sBc0ktiBIR53CI3bU&libraries=places"></script>
-    <style>
-
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        #map {
-            height: 90%;
-            width: 100%;
-        }
-        #controls {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
-            background: white;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-        }
-        #search-box {
-            width: 300px;
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
-<div id="controls">
-    <input id="search-box" type="text" placeholder="Search for a location">
-    <button id="get-route">Get Route</button>
-</div>
-<div id="map"></div>
-<script src="mapInitiation.js"></script>
-</body>
+    <div id="controls">
+        <input id="search-box" placeholder="Search for a location" type="text">
+        <label for="travel-mode"></label><select id="travel-mode">
+            <option value="DRIVING">Driving</option>
+            <option value="WALKING">Walking</option>
+        </select>
+        <button id="get-route">Get Route</button>
+    </div>
+
+    <div id="map"></div>
+    <script src="mapInitiation.js"></script>
+    <div id="travel-info">Estimated travel time will appear here.</div>
+    </body>
 </html>
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        height: 90%;
+        width: 100%;
+    }
+    #controls {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        background: white;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+    }
+    #search-box {
+        width: 300px;
+        margin-right: 10px;
+    }
+    #travel-info {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        font-size: 18px;
+        color: #333;
+        z-index: 999;
+    }
+</style>
 
 
