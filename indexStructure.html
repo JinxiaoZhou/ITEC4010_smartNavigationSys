@@ -15,6 +15,11 @@
     </div>
 
     <div id="map"></div>
+    <div id="most-used-locations">
+        <button onclick="goToLocation(43.77404863748761, -79.4998751746278, 'York University subway station')">York University subway station</button>
+        <button onclick="goToLocation(43.772698138219155, -79.50554005209277, 'Scott Library')">Scott Library</button>
+        <button onclick="goToLocation(43.774664873709554, -79.50940378309579, 'Tait McKenzie Centre')">Tait McKenzie Centre</button>
+    </div>
     <script src="mapInitiation.js"></script>
     <div id="travel-info">Estimated travel time will appear here.</div>
     </body>
@@ -56,6 +61,28 @@
         font-size: 18px;
         color: #333;
         z-index: 999;
+    }
+    #most-used-locations {
+        width: 100%;
+        background-color: #f4f4f4;
+        padding: 10px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+    }
+
+    #most-used-locations button {
+        margin: 5px;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    #most-used-locations button:hover {
+        background-color: #0056b3;
     }
 </style>
 
