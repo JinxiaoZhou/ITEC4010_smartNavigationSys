@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="English">
+
 <head>
     <title>Search and Route Map</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TDyrwOAf5WE_2-sBc0ktiBIR53CI3bU&libraries=places"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TDyrwOAf5WE_2-sBc0ktiBIR53CI3bU&libraries=places"></script>
 </head>
+
 <body>
     <div id="controls">
         <input id="search-box" placeholder="Search for a location" type="text">
@@ -16,25 +19,31 @@
 
     <div id="map"></div>
     <div id="most-used-locations">
-        <button onclick="goToLocation(43.77404863748761, -79.4998751746278, 'York University subway station')">York University subway station</button>
+        <button onclick="goToLocation(43.77404863748761, -79.4998751746278, 'York University subway station')">York
+            University subway station</button>
         <button onclick="goToLocation(43.772698138219155, -79.50554005209277, 'Scott Library')">Scott Library</button>
-        <button onclick="goToLocation(43.774664873709554, -79.50940378309579, 'Tait McKenzie Centre')">Tait McKenzie Centre</button>
+        <button onclick="goToLocation(43.774664873709554, -79.50940378309579, 'Tait McKenzie Centre')">Tait McKenzie
+            Centre</button>
     </div>
     <script src="mapInitiation.js"></script>
     <div id="travel-info">Estimated travel time will appear here.</div>
-    </body>
+</body>
+
 </html>
 
 <style>
-    body, html {
+    body,
+    html {
         height: 100%;
         margin: 0;
         padding: 0;
     }
+
     #map {
         height: 90%;
         width: 100%;
     }
+
     #controls {
         position: absolute;
         top: 10px;
@@ -46,10 +55,12 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         border-radius: 5px;
     }
+
     #search-box {
         width: 300px;
         margin-right: 10px;
     }
+
     #travel-info {
         position: absolute;
         bottom: 10px;
@@ -62,6 +73,7 @@
         color: #333;
         z-index: 999;
     }
+
     #most-used-locations {
         width: 100%;
         background-color: #f4f4f4;
@@ -85,5 +97,3 @@
         background-color: #0056b3;
     }
 </style>
-
-

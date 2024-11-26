@@ -1,0 +1,74 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#sideBar {
+  width: 25%;
+}
+
+#map-display {
+  margin-left: 25%;
+  height: 100%;
+  width: 80%;
+}
+
+#map {
+  height: 90%;
+  width: 100%;
+}
+
+#controls {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+#search-box {
+  width: 300px;
+  margin-right: 10px;
+}
+
+#travel-info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  color: #333;
+  z-index: 999;
+}
+
+#most-used-locations {
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+#most-used-locations button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#most-used-locations button:hover {
+  background-color: #0056b3;
+}
