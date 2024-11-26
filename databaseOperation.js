@@ -14,7 +14,7 @@ let userModel = conn.model('User', userSchema);
 
 //input -- user is object, strucure:eg.{userName:'Lily', passWd:'123'}
 //output-- false : already exist, true: load into database successfully
-async function loadData(user){
+async function loadUser(user){
 	
 	try {
 		const existingUser = await userModel.findOne({ userName: user.userName });
@@ -33,13 +33,17 @@ async function loadData(user){
 
 }
 
-//input -- userName is String
-//output-- false: user doesn't exsit, string: passWd
-async function fetchData(userName){
+//input -- uuser is object, strucure:eg.{userName:'Lily', passWd:'123'}
+//output-- false: user doesn't exsit or wrong passWd, true: match successfully
+async function matchUser(user){
 	try{
-		const existingUser = await userModel.findOne({ userName: userName });
+		const existingUser = await userModel.findOne({ userName: user.userName });
         if (existingUser) {
-            return user.passWd; 
+        	if(user.passWd === existingUser.passWd)
+        		return true;
+        	else
+        		return false;
+            
         }else{
         	return false;
 
@@ -49,7 +53,7 @@ async function fetchData(userName){
 	}
 }
 
-async function deleteData(userName){
+async function deleteUser(userName){
 	try{
 		const result = await userModel.deleteOne({ userName: userName });
 
@@ -78,6 +82,7 @@ async function showAll(){
 		console.error('Error fetching data:', err);
 	}
 }
+
 //delete the result in database
 async function deleteAll(){
 	try {
@@ -92,27 +97,35 @@ async function deleteAll(){
 // readFile(fs,filePath_soci, socialModel);
 // exports = []
 
-module.exports.loadData=loadData;
-module.exports.deleteData=deleteData;
+module.exports.loadUser=loadUser;
+module.exports.matchUser=matchUser;
+module.exports.deleteUser=deleteUser;
+
 
 
 (async () => {
     try {
     	//add user example
     	const user = {userName:'Lily', passWd:'123'};
-    	// let loadResult = await loadData(user);
-        // if(loadResult){
-        // 	console.log('load Successfully!');
-        // }else{
-        // 	console.log('exiting user!');
-        // }
-        // await showAll();
+    	let loadResult = await loadUser(user);
+        if(loadResult){
+        	console.log('load Successfully!');
+        }else{
+        	console.log('exiting user!');
+        }
+        await showAll();
 
-
+        //match user
+        let result = await matchUser(user);
+        if(result){
+        	console.log('match Successfully!');
+        }else{
+        	console.log('fail!');
+        }
 
         //delete user example
-        let loadResult = await deleteData(user.userName);
-        if(loadResult){
+        result = await deleteUser(user.userName);
+        if(result){
         	console.log('delete Successfully!');
         }else{
         	console.log('not found!');
