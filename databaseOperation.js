@@ -14,7 +14,7 @@ let userModel = conn.model('User', userSchema);
 
 //input -- user is object, strucure:eg.{userName:'Lily', passWd:'123'}
 //output-- false : already exist, true: load into database successfully
-async function loadUser(user){
+async function addUser(user){
 	
 	try {
 		const existingUser = await userModel.findOne({ userName: user.userName });
@@ -97,46 +97,46 @@ async function deleteAll(){
 // readFile(fs,filePath_soci, socialModel);
 // exports = []
 
-module.exports.loadUser=loadUser;
+module.exports.addUser=addUser;
 module.exports.matchUser=matchUser;
 module.exports.deleteUser=deleteUser;
 
 
 
-(async () => {
-    try {
-    	//add user example
-    	const user = {userName:'Lily', passWd:'123'};
-    	let loadResult = await loadUser(user);
-        if(loadResult){
-        	console.log('load Successfully!');
-        }else{
-        	console.log('exiting user!');
-        }
-        await showAll();
+// (async () => {
+//     try {
+//     	//add user example
+//     	const user = {userName:'Lily', passWd:'123'};
+//     	let loadResult = await loadUser(user);
+//         if(loadResult){
+//         	console.log('load Successfully!');
+//         }else{
+//         	console.log('exiting user!');
+//         }
+//         await showAll();
 
-        //match user
-        let result = await matchUser(user);
-        if(result){
-        	console.log('match Successfully!');
-        }else{
-        	console.log('fail!');
-        }
+//         //match user
+//         let result = await matchUser(user);
+//         if(result){
+//         	console.log('match Successfully!');
+//         }else{
+//         	console.log('fail!');
+//         }
 
-        //delete user example
-        result = await deleteUser(user.userName);
-        if(result){
-        	console.log('delete Successfully!');
-        }else{
-        	console.log('not found!');
-        }
-        await showAll();
+//         //delete user example
+//         result = await deleteUser(user.userName);
+//         if(result){
+//         	console.log('delete Successfully!');
+//         }else{
+//         	console.log('not found!');
+//         }
+//         await showAll();
         
 
-    } catch (err) {
-        console.error('Error in processing 301:', err);
-    }
-})();
+//     } catch (err) {
+//         console.error('Error in processing 301:', err);
+//     }
+// })();
 
 
 
