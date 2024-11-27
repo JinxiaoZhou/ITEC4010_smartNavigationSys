@@ -27,9 +27,21 @@
     </div>
     <script src="mapInitiation.js"></script>
     <div id="travel-info">Estimated travel time will appear here.</div>
+
+    <div id="username">
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            if (username) {
+                document.getElementById('username').innerHTML = `<p>Hello, ${username}!</p>`;
+            }
+        </script>
+    </div>
 </body>
 
 </html>
+
+<!-- Location: http://127.0.0.1:5500/indexStructure.html?username=sayMyName&time=IDK -->
 
 <style>
     body,
@@ -65,6 +77,19 @@
         position: absolute;
         bottom: 10px;
         left: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        font-size: 18px;
+        color: #333;
+        z-index: 999;
+    }
+
+    #username {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
         background-color: rgba(255, 255, 255, 0.8);
         padding: 10px;
         border-radius: 8px;
