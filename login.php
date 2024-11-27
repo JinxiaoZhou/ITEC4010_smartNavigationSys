@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   if ($user) {
     if (($_POST["password"] === $user["password"])) {
-      header("Location: indexStructure.html?username=" . $user["username"]);
+      header("Location: https://raw.githack.com/JinxiaoZhou/ITEC4010_smartNavigationSys/main/indexStructure.html?username=" . $user["username"] . "&time=" . date('m-d H:i:s'));
     } else {
       $login_msg = "Wrong password";
     }
