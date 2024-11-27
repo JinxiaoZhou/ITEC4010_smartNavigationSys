@@ -1,3 +1,31 @@
+<?php
+$login_fail = false;
+$login_msg = "Wrong Username";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+  $mysqli = require __DIR__ . "/db.php";
+
+  $sql = sprintf(
+    "SELECT * FROM login_info WHERE username ='%s'",
+    $mysqli->real_escape_string($_POST["username"])
+  );
+  $result = $mysqli->query($sql);
+  $user = $result->fetch_assoc();
+
+  if ($user) {
+    if (($_POST["password"] === $user["password"])) {
+      header("Location: indexStructure.html?username=" . $user["username"]);
+    } else {
+      $login_msg = "Wrong password";
+    }
+  }
+
+  $login_fail = true;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,41 +36,23 @@
 
 </head>
 
-
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <input type="text" id="username" placeholder="Username" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button onclick="login()">Login</button>
-    <a href="signup.html">Don't have an account? Signup</a>
+    <form method="post">
+      <input type="text" id="username" name="username" placeholder="Username" required>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+
+      <button type="submit">Login</button>
+    </form>
+    <a href="signup.php">Don't have an account? Signup</a>
   </div>
 
-  <script>
-    async function login() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      const response = await fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        alert('Login successful');
-      } else {
-        alert('Login failed');
-      }
-    }
-  </script>
+  <?php if ($login_fail): ?>
+    <script>
+      alert("Username or password is incorrect");
+    </script>';
+  <?php endif ?>
 
 </body>
 
