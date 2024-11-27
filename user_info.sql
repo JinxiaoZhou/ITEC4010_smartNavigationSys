@@ -14,6 +14,6 @@ INSERT IGNORE INTO `login_info` (`id`, `username`, `password`) VALUES
 
 
 ALTER TABLE `login_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 COMMIT;

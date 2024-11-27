@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   if ($stmt->execute()) {
     echo '<script>alert("Signed up sucessfuly!");
-            window.location.href="/ITEC4010_smartNavigationSys/indexStructure.html";
+            window.location.href="/ITEC4010_smartNavigationSys/login.php";
             </script>';
   }
 }

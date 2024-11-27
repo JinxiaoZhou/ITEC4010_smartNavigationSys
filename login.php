@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   if ($user) {
     if (($_POST["password"] === $user["password"])) {
-      header("https://raw.githack.com/JinxiaoZhou/ITEC4010_smartNavigationSys/main/indexStructure.html?username=" . $user["username"]);
+      header("Location: indexStructure.html?username=" . $user["username"]);
     } else {
       $login_msg = "Wrong password";
     }
@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   <?php if ($login_fail): ?>
     <script>
-      alert("Username or password is incorrect");
-    </script>';
+      alert("<?php echo $login_msg; ?>");
+    </script>
   <?php endif ?>
 
 </body>
