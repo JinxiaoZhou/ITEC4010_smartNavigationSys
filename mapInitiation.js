@@ -41,6 +41,8 @@ function initMap() {
             alert("No places found!");
             return;
         }
+        // clear existing route
+        directionsRenderer.setDirections(null);
 
         // Get the first place as the destination
         const place = places[0];
@@ -48,11 +50,16 @@ function initMap() {
             destination = place.geometry.location;
 
             // Add a marker for the destination
-            new google.maps.Marker({
-                map: map,
-                position: destination,
-                title: place.name,
-            });
+            if (marker){
+                marker.setPosition(destination);
+                marker.setTitle(place.name);
+            }else{
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: destination,
+                    title: place.name,
+                });
+            }
 
             // Center the map to the destination
             map.setCenter(destination);
